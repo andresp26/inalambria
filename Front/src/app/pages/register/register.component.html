@@ -1,0 +1,58 @@
+<div class="container">
+    <mat-card>
+        <div>
+            <h1>Formulario de registro</h1>
+            <hr>
+        </div>
+        <div>
+            <img src="./../../../assets/images/no-avatar.png">
+        </div>
+        <form [formGroup]="registerForm">
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese su correo</mat-label>
+                <input matInput placeholder="pat@example.com" formControlName="email" required>
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error *ngIf="!registerForm.controls.email.valid">{{getErrorEmail()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese su nombre</mat-label>
+                <input matInput placeholder="pat@example.com" formControlName="name" required>
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-error *ngIf="!registerForm.controls.name.valid">{{getErrorName()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese su apellido</mat-label>
+                <input matInput placeholder="pat@example.com" formControlName="lastName" required>
+                <mat-icon matSuffix>face</mat-icon>
+                <mat-error *ngIf="!registerForm.controls.lastName.valid">{{getErrorlastName()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese su fecha de nacimiento</mat-label>
+                <input matInput readonly [matDatepicker]="picker" required formControlName="dob">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="!registerForm.controls.dob.valid">{{getErrordob()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese su contraseña</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" required formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error>{{getErrorPassword()}}</mat-error>
+            </mat-form-field>
+        </form>
+        <div>
+            <mat-grid-list cols="2" rowHeight="2:1">
+                <mat-grid-tile> <button mat-raised-button color="warn" class="btnRegistrar"
+                        [disabled]="!this.registerForm.valid" (click)="registrar()">Registrarse</button>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <button mat-raised-button color="primary" [routerLink]="['/login']">Iniciar
+                        sesión</button>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+    </mat-card>
+</div>
